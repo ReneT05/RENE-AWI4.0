@@ -45,7 +45,7 @@ def app2():
 
     return "<h5>Hola mamá estoy en Practica 8 :D❤️</h5>"
 
-@app.route("/clientes)
+@app.route("/clientes")
 def clientes():
     if not con.is_connected():
         con.reconnect()
@@ -62,7 +62,7 @@ def clientes():
    return render_template("clientes.html", clientes=registros)
 
 
-@app.route("/agenda)
+@app.route("/agenda")
 def agenda():
     if not con.is_connected():
         con.reconnect()
