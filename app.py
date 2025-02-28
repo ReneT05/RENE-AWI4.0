@@ -56,7 +56,7 @@ def clientes():
     cursor.execute(sql)
     registros = cursor.fetchall()
 
-    
+
     con.close()
     return render_template("clientes.html", clientes=registros)
 
@@ -71,7 +71,7 @@ def agenda():
 
     cursor.execute(sql)
     registros = cursor.fetchall()
-    
+
     con.close()
     return render_template("agenda.html", agenda=registros)
 
