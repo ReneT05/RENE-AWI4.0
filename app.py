@@ -45,88 +45,38 @@ def app2():
 
     return "<h5>Hola mamá estoy en Practica 8 :D❤️</h5>"
 
-@app.route("/productos")
-def productos():
+@app.route("/clientes)
+def clientes():
     if not con.is_connected():
         con.reconnect()
 
     cursor = con.cursor(dictionary=True)
-    sql    = """
-    SELECT Id_Producto,
-           Nombre_Producto,
-           Precio,
-           Existencias
-
-    FROM productos
-
-    LIMIT 10 OFFSET 0
-    """
+    sql    = """SELECT * FROM clientes  """
 
     cursor.execute(sql)
     registros = cursor.fetchall()
 
-    # Si manejas fechas y horas
-    """
-    for registro in registros:
-        fecha_hora = registro["Fecha_Hora"]
+    
+    con.close()
 
-        registro["Fecha_Hora"] = fecha_hora.strftime("%Y-%m-%d %H:%M:%S")
-        registro["Fecha"]      = fecha_hora.strftime("%d/%m/%Y")
-        registro["Hora"]       = fecha_hora.strftime("%H:%M:%S")
-    """
+   return render_template("clientes.html", clientes=registros)
 
-    return render_template("productos.html", productos=registros)
 
-@app.route("/productos/buscar", methods=["GET"])
-def buscarProductos():
+@app.route("/agenda)
+def agenda():
     if not con.is_connected():
         con.reconnect()
 
-    args     = request.args
-    busqueda = args["busqueda"]
-    busqueda = f"%{busqueda}%"
-    
     cursor = con.cursor(dictionary=True)
-    sql    = """
-    SELECT Id_Producto,
-           Nombre_Producto,
-           Precio,
-           Existencias
+    sql    = """SELECT * FROM eventos INNER JOIN clientes ON clientes.idCliente = eventos.idCliente  """
 
-    FROM productos
+    cursor.execute(sql)
+    registros = cursor.fetchall()
 
-    WHERE Nombre_Producto LIKE %s
-    OR    Precio          LIKE %s
-    OR    Existencias     LIKE %s
+    
+    con.close()
 
-    ORDER BY Id_Producto DESC
-
-    LIMIT 10 OFFSET 0
-    """
-    val    = (busqueda, busqueda, busqueda)
-
-    try:
-        cursor.execute(sql, val)
-        registros = cursor.fetchall()
-
-        # Si manejas fechas y horas
-        """
-        for registro in registros:
-            fecha_hora = registro["Fecha_Hora"]
-
-            registro["Fecha_Hora"] = fecha_hora.strftime("%Y-%m-%d %H:%M:%S")
-            registro["Fecha"]      = fecha_hora.strftime("%d/%m/%Y")
-            registro["Hora"]       = fecha_hora.strftime("%H:%M:%S")
-        """
-
-    except mysql.connector.errors.ProgrammingError as error:
-        print(f"Ocurrió un error de programación en MySQL: {error}")
-        registros = []
-
-    finally:
-        con.close()
-
-    return make_response(jsonify(registros))
+   return render_template("agenda.html", agenda=registros)
 
 @app.route("/producto", methods=["POST"])
 # Usar cuando solo se quiera usar CORS en rutas específicas
