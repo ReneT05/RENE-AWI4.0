@@ -9,40 +9,29 @@ function activeMenuOption(href) {
 }
 
 // Hay que modificarlo para el nombre de la aplicacion
-const app = angular.module("angularjsApp", ["ngRoute"])
+const app = angular.module("angularjsRene", ["ngRoute"])
 app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix("")
 
     // y para las rutas
     $routeProvider
     .when("/", {
-        templateUrl: "/app",
+        templateUrl: "views/app.html",
         controller: "appCtrl"
     })
-    .when("/productos", {
-        templateUrl: "/productos",
-        controller: "productosCtrl"
+    .when("/clientes", {
+        templateUrl: "views/clientes.html",
+        controller: "clientesCtrl"
     })
-    .when("/alumnos", {
-        templateUrl: "/alumnos",
-        controller: "alumnosCtrl"
-    })
-    .when("/ventas", {
-        templateUrl: "/ventas",
-        controller: "ventasCtrl"
-    })
-    .when("/reportes", {
-        templateUrl: "/reportes",
-        controller: "reportesCtrl"
-    })
-    .when("/notificaciones", {
-        templateUrl: "/notificaciones",
-        controller: "notificacionesCtrl"
+    .when("/agenda", {
+        templateUrl: "views/agenda.html",
+        controller: "agendaCtrl"
     })
     .otherwise({
         redirectTo: "/"
     })
 })
+
 app.run(["$rootScope", "$location", "$timeout", function($rootScope, $location, $timeout) {
     function actualizarFechaHora() {
         lxFechaHora = DateTime
