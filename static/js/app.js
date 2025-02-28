@@ -16,15 +16,15 @@ app.config(function ($routeProvider, $locationProvider) {
     // y para las rutas
     $routeProvider
     .when("/", {
-        templateUrl: "app.html",
+        templateUrl: "/app",
         controller: "appCtrl"
     })
     .when("/clientes", {
-        templateUrl: "/clientes.html",
+        templateUrl: "/clientes",
         controller: "clientesCtrl"
     })
     .when("/agenda", {
-        templateUrl: "/agenda.html",
+        templateUrl: "/agenda",
         controller: "agendaCtrl"
     })
     .otherwise({
