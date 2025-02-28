@@ -59,7 +59,7 @@ def clientes():
     
     con.close()
 
-   return render_template("clientes.html", clientes=registros)
+   return render_template("clientes.html", clientes=registros")
 
 
 @app.route("/agenda")
@@ -76,5 +76,5 @@ def agenda():
     
     con.close()
 
-   return render_template("agenda.html", agenda=registros)
+   return render_template("agenda.html", agenda=registros")
 
