@@ -7,13 +7,13 @@
             <th>Correo Electrónico</th>
         </tr>
     </thead>
+        {% for cliente in clientes %}
     <tbody>
-        <!-- ng-repeat, solo cambiar el nombre  -->
-        <tr ng-repeat="x in clientes">
-            <td scope="col">{{ x.idCliente }}</td>
-            <td scope="col">{{ x.nombreCliente }}</td>
-            <td scope="col">{{ x.telefono }}</td>
-            <td scope="col">{{ x.correoElectronico }}</td>
+            <td>{{ cliente.idCliente }}</td>
+            <td>{{ cliente.nombreCliente }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>{{ cliente.correoElectronico }}</td>
         </tr>
     </tbody>
+        {% endfor %}
 </table>

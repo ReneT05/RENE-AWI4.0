@@ -51,15 +51,14 @@ def clientes():
         con.reconnect()
 
     cursor = con.cursor(dictionary=True)
-    sql    = """SELECT * FROM clientes  """
+    sql    = """SELECT * FROM clientes"""
 
     cursor.execute(sql)
     registros = cursor.fetchall()
 
     
     con.close()
-
-   return render_template("clientes.html", clientes=registros")
+    return render_template("clientes.html", clientes=registros)
 
 
 @app.route("/agenda")
@@ -68,13 +67,11 @@ def agenda():
         con.reconnect()
 
     cursor = con.cursor(dictionary=True)
-    sql    = """SELECT * FROM eventos INNER JOIN clientes ON clientes.idCliente = eventos.idCliente  """
+    sql    = """SELECT * FROM eventos INNER JOIN clientes ON clientes.idCliente = eventos.idCliente"""
 
     cursor.execute(sql)
     registros = cursor.fetchall()
-
     
     con.close()
-
-   return render_template("agenda.html", agenda=registros")
+    return render_template("agenda.html", agenda=registros)
 
