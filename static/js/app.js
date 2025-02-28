@@ -20,11 +20,11 @@ app.config(function ($routeProvider, $locationProvider) {
         controller: "appCtrl"
     })
     .when("/clientes", {
-        templateUrl: "clientes.html",
+        templateUrl: "/clientes.html",
         controller: "clientesCtrl"
     })
     .when("/agenda", {
-        templateUrl: "agenda.html",
+        templateUrl: "/agenda.html",
         controller: "agendaCtrl"
     })
     .otherwise({
